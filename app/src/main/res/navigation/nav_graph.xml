@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/waitingGamesFragment">
+    <fragment
+        android:id="@+id/waitingGamesFragment"
+        android:name="io.github.thatusualguy.chessonline.ui.games.WaitingGamesFragment"
+        android:label="fragment_waiting_games_list"
+        tools:layout="@layout/fragment_waiting_games_list" >
+        <action
+            android:id="@+id/action_waitingGamesFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_waitingGamesFragment_to_historyFragment"
+            app:destination="@id/historyFragment" />
+        <action
+            android:id="@+id/action_waitingGamesFragment_to_gameCreationFragment"
+            app:destination="@id/gameCreationFragment" />
+        <action
+            android:id="@+id/action_waitingGamesFragment_to_gameFragment"
+            app:destination="@id/gameFragment" />
+        <action
+            android:id="@+id/action_waitingGamesFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="io.github.thatusualguy.chessonline.ui.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="io.github.thatusualguy.chessonline.ui.history.HistoryFragment"
+        android:label="fragment_history"
+        tools:layout="@layout/fragment_history" >
+        <action
+            android:id="@+id/action_historyFragment_to_gameHistoryFragment"
+            app:destination="@id/gameHistoryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameCreationFragment"
+        android:name="io.github.thatusualguy.chessonline.ui.games.GameCreationFragment"
+        android:label="fragment_game_creation"
+        tools:layout="@layout/fragment_game_creation" >
+        <action
+            android:id="@+id/action_gameCreationFragment_to_gameFragment"
+            app:destination="@id/gameFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameFragment"
+        android:name="io.github.thatusualguy.chessonline.ui.games.GameFragment"
+        android:label="fragment_game"
+        tools:layout="@layout/fragment_game" >
+        <action
+            android:id="@+id/action_gameFragment_to_resultFragment"
+            app:destination="@id/resultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameHistoryFragment"
+        android:name="io.github.thatusualguy.chessonline.ui.history.GameHistoryFragment"
+        android:label="fragment_game_history"
+        tools:layout="@layout/fragment_game_history" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="io.github.thatusualguy.chessonline.ui.auth.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="io.github.thatusualguy.chessonline.ui.auth.RegisterFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" />
+    <fragment
+        android:id="@+id/resultFragment"
+        android:name="io.github.thatusualguy.chessonline.ui.games.ResultFragment"
+        android:label="fragment_result"
+        tools:layout="@layout/fragment_result" >
+        <action
+            android:id="@+id/action_resultFragment_to_waitingGamesFragment"
+            app:destination="@id/waitingGamesFragment"
+            app:popUpTo="@id/waitingGamesFragment" />
+    </fragment>
+</navigation>

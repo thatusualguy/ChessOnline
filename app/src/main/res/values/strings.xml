@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">ChessOnline</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="profile">Profile</string>
+    <string name="games">Games</string>
+    <string name="history">History</string>
+    <string name="win">You won!</string>
+    <string name="lost">You lost!</string>
+</resources>

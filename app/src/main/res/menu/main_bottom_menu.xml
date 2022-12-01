@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/profileFragment"
+        android:icon="@drawable/profile"
+        android:title="@string/profile" />
+    <item
+        android:id="@+id/waitingGamesFragment"
+        android:icon="@drawable/stadia_controller"
+        android:title="@string/games" />
+    <item
+        android:id="@+id/historyFragment"
+        android:icon="@drawable/history"
+        android:title="@string/history" />
+</menu>

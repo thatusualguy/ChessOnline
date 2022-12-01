@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.profile.ProfileFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@drawable/spacer_large"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:showDividers="middle">
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="?attr/colorSecondary"
+                app:cardCornerRadius="@dimen/cornerRadius">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:divider="@drawable/spacer_medium"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:padding="8dp"
+                    android:showDividers="middle">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left"
+                        android:layout_margin="8dp"
+                        android:text="Account details"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        tools:ignore="RtlHardcoded" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Email"
+                        app:boxCornerRadiusBottomEnd="@dimen/cornerRadius"
+                        app:boxCornerRadiusBottomStart="@dimen/cornerRadius"
+                        app:boxCornerRadiusTopEnd="@dimen/cornerRadius"
+                        app:boxCornerRadiusTopStart="@dimen/cornerRadius">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/registration.email"
+                            style="@style/textInputEditText"
+                            android:inputType="textPassword" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Name"
+                        app:boxCornerRadiusBottomEnd="@dimen/cornerRadius"
+                        app:boxCornerRadiusBottomStart="@dimen/cornerRadius"
+                        app:boxCornerRadiusTopEnd="@dimen/cornerRadius"
+                        app:boxCornerRadiusTopStart="@dimen/cornerRadius">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/registration.name"
+                            style="@style/textInputEditText"
+                            android:inputType="textPassword" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Password"
+                        app:boxCornerRadiusBottomEnd="@dimen/cornerRadius"
+                        app:boxCornerRadiusBottomStart="@dimen/cornerRadius"
+                        app:boxCornerRadiusTopEnd="@dimen/cornerRadius"
+                        app:boxCornerRadiusTopStart="@dimen/cornerRadius">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/registration.password"
+                            style="@style/textInputEditText"
+                            android:inputType="textPassword" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <Button
+                        android:id="@+id/profile.apply_changes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:width="200dp"
+                        android:text="Apply changes" />
+
+                    <Button
+                        android:id="@+id/profile.discard_changes"
+                        style="?attr/materialButtonOutlinedStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:width="200dp"
+                        android:text="Discard changes"
+                        app:strokeColor="?attr/colorPrimary"
+                        app:strokeWidth="2dp" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="?attr/colorSecondary"
+                app:cardCornerRadius="@dimen/cornerRadius">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:divider="@drawable/spacer_medium"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:padding="8dp"
+                    android:showDividers="middle">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left"
+                        android:layout_margin="8dp"
+                        android:text="Settings"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        tools:ignore="RtlHardcoded" />
+
+                    <Button
+                        android:id="@+id/profile.settings.logout"
+                        style="?attr/materialButtonOutlinedStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:width="200dp"
+                        android:drawableEnd="@drawable/logout_20dp"
+                        android:drawableTint="?attr/colorPrimary"
+                        android:text="Logout"
+                        app:strokeColor="?attr/colorPrimary"
+                        app:strokeWidth="2dp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+     <include layout="@layout/bottom_navigation_layout" />
+</LinearLayout>

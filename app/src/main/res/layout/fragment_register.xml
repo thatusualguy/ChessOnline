@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".ui.auth.RegisterFragment">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:gravity="center"
+        android:text="Registration"
+        android:textSize="35sp" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="48dp"
+        android:layout_marginRight="48dp"
+        app:cardBackgroundColor="?attr/colorSecondary"
+        app:cardCornerRadius="@dimen/cornerRadius">
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:padding="8dp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:divider="@drawable/spacer_medium"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:showDividers="middle">
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email"
+                app:boxCornerRadiusBottomEnd="@dimen/cornerRadius"
+                app:boxCornerRadiusBottomStart="@dimen/cornerRadius"
+                app:boxCornerRadiusTopEnd="@dimen/cornerRadius"
+                app:boxCornerRadiusTopStart="@dimen/cornerRadius">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/registration.email"
+                    style="@style/textInputEditText"
+                    android:inputType="textPassword" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Name"
+                app:boxCornerRadiusBottomEnd="@dimen/cornerRadius"
+                app:boxCornerRadiusBottomStart="@dimen/cornerRadius"
+                app:boxCornerRadiusTopEnd="@dimen/cornerRadius"
+                app:boxCornerRadiusTopStart="@dimen/cornerRadius">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/registration.name"
+                    style="@style/textInputEditText"
+                    android:inputType="textPassword" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Password"
+                app:boxCornerRadiusBottomEnd="@dimen/cornerRadius"
+                app:boxCornerRadiusBottomStart="@dimen/cornerRadius"
+                app:boxCornerRadiusTopEnd="@dimen/cornerRadius"
+                app:boxCornerRadiusTopStart="@dimen/cornerRadius">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/registration.password"
+                    style="@style/textInputEditText"
+                    android:inputType="textPassword" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/registration.register"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="8dp"
+                android:text="Register me!" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"/>
+</LinearLayout>
