@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'com.google.protobuf' version '0.9.1'
+    id 'androidx.navigation.safeargs' version '2.5.3'
 }
 
 android {
@@ -22,6 +23,10 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+
+    viewBinding {
+        enabled = true
     }
 
     compileOptions {
@@ -55,6 +60,8 @@ protobuf {
         artifact = "com.google.protobuf:protoc:3.21.7"
     }
     plugins {
+        javalite { artifact = "com.google.protobuf:protoc-gen-javalite:3.0.0" }
+
         grpc {
             artifact = 'io.grpc:protoc-gen-grpc-java:1.51.1'
         }
@@ -76,18 +83,26 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.7.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'androidx.navigation:navigation-fragment:2.5.3'
-    implementation 'androidx.navigation:navigation-ui:2.5.3'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
+
+    implementation 'androidx.navigation:navigation-ui:2.5.3'
+    implementation 'androidx.navigation:navigation-fragment:2.5.3'
+    implementation "androidx.navigation:navigation-safe-args-gradle-plugin:2.5.3"
 
     // grpc libraries
     implementation 'io.grpc:grpc-okhttp:1.51.1'
     implementation 'io.grpc:grpc-protobuf-lite:1.51.1'
     implementation 'io.grpc:grpc-stub:1.51.1'
+//    protobuf 'com.google.protobuf:protobuf-java:3.17.2'
     compileOnly 'org.apache.tomcat:annotations-api:6.0.53' // necessary for Java 9+
+
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+}
+
+configurations {
+    implementation.exclude module:'protobuf-java'
 }
