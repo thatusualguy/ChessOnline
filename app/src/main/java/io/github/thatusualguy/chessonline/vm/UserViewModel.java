@@ -14,8 +14,19 @@ import io.grpc.stub.CallStreamObserver;
 import io.grpc.stub.StreamObserver;
 
 public class UserViewModel extends ViewModel {
-	private MutableLiveData<User> user = new MutableLiveData<>();
+	private final MutableLiveData<User> user = new MutableLiveData<>();
 
+	// TODO: load user from shared prefs
+	public LiveData<User> getUser() {
+		if (user.getValue() == null) {
+			user.postValue(new User());
+		}
+		return user;
+	}
+
+	public void setUser(User _user) {
+		user.postValue(_user);
+	}
 
 	public LiveData<LoginResult> login(String username, String password) {
 		ManagedChannel channel = Grpc.getManagedChannel();
@@ -31,20 +42,24 @@ public class UserViewModel extends ViewModel {
 				.build();
 
 		MutableLiveData<LoginResult> res = new MutableLiveData<>();
-		asyncStub.login(loginReqiest, new StreamObserver<ChessOnline.login_reply>(){
+		asyncStub.login(loginReqiest, new StreamObserver<ChessOnline.login_reply>() {
 
 			@Override
 			public void onNext(ChessOnline.login_reply value) {
 				LoginResult loginResult = new LoginResult();
 				loginResult.success = value.hasJwt();
 
-				if (loginResult.success){
+				if (loginResult.success) {
 					loginResult.jwt = value.getJwt();
-				}
-				else {
+				} else {
 					loginResult.message = value.getErrorMessage();
 				}
 				res.postValue(loginResult);
+
+				User logged_user = new User();
+				logged_user.Logged_in = true;
+				logged_user.Jwt = value.getJwt();
+				user.postValue(logged_user);
 			}
 
 			@Override
@@ -54,21 +69,14 @@ public class UserViewModel extends ViewModel {
 
 				loginResult.message = t.getMessage();
 				res.postValue(loginResult);
+//				user.postValue(new User());
 			}
 
 			@Override
-			public void onCompleted() {	}
+			public void onCompleted() {
+			}
 		});
 
 		return res;
-	}
-
-	public LiveData<User> getUser() {
-		user.setValue(new User());
-//		 if (savedJwt){
-//		getUserInfo(jwt) != null
-//				user.setValue(new User(){jwt = jwt});
-
-		return user;
 	}
 }

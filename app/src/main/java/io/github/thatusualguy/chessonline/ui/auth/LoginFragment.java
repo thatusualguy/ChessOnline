@@ -61,8 +61,8 @@ public class LoginFragment extends Fragment {
 		savedStateHandle.set(LOGIN_SUCCESSFUL, false);
 
 		binding.loginLoginButton.setOnClickListener(v -> {
-			String username = binding.registrationEmail.getText().toString();
-			String password = binding.registrationPassword.getText().toString();
+			String username = binding.registrationEmail.getText().toString().trim();
+			String password = binding.registrationPassword.getText().toString().trim();
 			View control = binding.loginLoginButton;
 			login(username, password, control);
 		});
@@ -82,7 +82,7 @@ public class LoginFragment extends Fragment {
 		userViewModel.login(username, password).observe(getViewLifecycleOwner(), (Observer<LoginResult>) result -> {
 			if (result.success) {
 				savedStateHandle.set(LOGIN_SUCCESSFUL, true);
-				NavHostFragment.findNavController(this).popBackStack();
+				Navigation.findNavController(binding.getRoot()).popBackStack();
 			} else {
 				showErrorMessage(result);
 			}
@@ -92,8 +92,8 @@ public class LoginFragment extends Fragment {
 
 	private void showErrorMessage(LoginResult result) {
 		Snackbar.make(requireView(), result.message, Snackbar.LENGTH_LONG)
-				.setBackgroundTint(com.google.android.material.R.attr.colorPrimaryVariant)
-				.setTextColor(com.google.android.material.R.attr.colorOnPrimary)
+//				.setBackgroundTint(com.google.android.material.R.attr.colorPrimaryVariant)
+//				.setTextColor(com.google.android.material.R.attr.colorOnPrimary)
 				.show();
 	}
 

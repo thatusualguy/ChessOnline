@@ -16,5 +16,13 @@
         <item name="textAllCaps">false</item>
         <item name="android:windowLightNavigationBar">true</item>
         <item name="android:textColor">?attr/colorOnSecondary</item>
+
+        <item name="snackbarStyle">@style/MySnackBarStyle</item>
     </style>
+
+    <style name="MySnackBarStyle" parent="Widget.MaterialComponents.Snackbar">
+        <item name="android:backgroundTint">@color/asparagus</item>
+        <item name="android:textColor">@color/desert_storm</item>
+    </style>
+
 </resources>
