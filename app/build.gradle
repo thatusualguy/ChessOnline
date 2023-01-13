@@ -56,6 +56,8 @@ protobuf {
         artifact = "com.google.protobuf:protoc:3.21.7"
     }
     plugins {
+        javalite { artifact = "com.google.protobuf:protoc-gen-javalite:3.0.0" }
+
         grpc {
             artifact = 'io.grpc:protoc-gen-grpc-java:1.51.1'
         }
@@ -93,4 +95,8 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+}
+
+configurations {
+    implementation.exclude module:'protobuf-java'
 }
