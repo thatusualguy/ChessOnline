@@ -4,4 +4,5 @@
     android:name="io.github.thatusualguy.chessonline.ui.BottomNavigationFragment"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:id="@+id/meme"
     tools:layout="@layout/fragment_bottom_navigation" />

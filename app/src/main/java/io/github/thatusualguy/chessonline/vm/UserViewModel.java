@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel;
 import io.github.thatusualguy.chessonline.Grpc;
 import io.github.thatusualguy.chessonline.grpc.ChessOnline;
 import io.github.thatusualguy.chessonline.grpc.chess_accountGrpc;
+import io.grpc.Deadline;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.stub.CallStreamObserver;
@@ -43,27 +44,30 @@ public class UserViewModel extends ViewModel {
 				else {
 					loginResult.message = value.getErrorMessage();
 				}
-				res.setValue(loginResult);
+				res.postValue(loginResult);
 			}
 
 			@Override
 			public void onError(Throwable t) {
 				LoginResult loginResult = new LoginResult();
-
 				loginResult.success = false;
+
 				loginResult.message = t.getMessage();
+				res.postValue(loginResult);
 			}
 
 			@Override
-			public void onCompleted() {
-
-			}
+			public void onCompleted() {	}
 		});
 
 		return res;
 	}
 
 	public LiveData<User> getUser() {
+		user.setValue(new User());
+//		 if (savedJwt){
+//		getUserInfo(jwt) != null
+//				user.setValue(new User(){jwt = jwt});
 
 		return user;
 	}

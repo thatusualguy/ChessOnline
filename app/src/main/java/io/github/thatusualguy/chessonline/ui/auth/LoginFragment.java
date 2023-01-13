@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.SavedStateHandle;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -18,6 +19,7 @@ import android.view.ViewGroup;
 import com.google.android.material.snackbar.Snackbar;
 
 import io.github.thatusualguy.chessonline.databinding.FragmentLoginBinding;
+import io.github.thatusualguy.chessonline.ui.games.WaitingGamesFragmentDirections;
 import io.github.thatusualguy.chessonline.vm.LoginResult;
 import io.github.thatusualguy.chessonline.vm.UserViewModel;
 
@@ -58,15 +60,25 @@ public class LoginFragment extends Fragment {
 				.getSavedStateHandle();
 		savedStateHandle.set(LOGIN_SUCCESSFUL, false);
 
-		binding.loginLogin.setOnClickListener(v -> {
+		binding.loginLoginButton.setOnClickListener(v -> {
 			String username = binding.registrationEmail.getText().toString();
 			String password = binding.registrationPassword.getText().toString();
-			login(username, password);
+			View control = binding.loginLoginButton;
+			login(username, password, control);
 		});
 
+		binding.loginRegister.setOnClickListener(v -> {
+			final NavController navController = Navigation.findNavController(view);
+			navController.navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment(
+					binding.registrationEmail.getText().toString(),
+					binding.registrationPassword.getText().toString()
+			));
+		});
 	}
 
-	private void login(String username, String password) {
+	private void login(String username, String password, View control) {
+		control.setEnabled(false);
+
 		userViewModel.login(username, password).observe(getViewLifecycleOwner(), (Observer<LoginResult>) result -> {
 			if (result.success) {
 				savedStateHandle.set(LOGIN_SUCCESSFUL, true);
@@ -74,11 +86,14 @@ public class LoginFragment extends Fragment {
 			} else {
 				showErrorMessage(result);
 			}
+			control.setEnabled(true);
 		});
 	}
 
 	private void showErrorMessage(LoginResult result) {
-		Snackbar.make(getView(), result.message, Snackbar.LENGTH_LONG)
+		Snackbar.make(requireView(), result.message, Snackbar.LENGTH_LONG)
+				.setBackgroundTint(com.google.android.material.R.attr.colorPrimaryVariant)
+				.setTextColor(com.google.android.material.R.attr.colorOnPrimary)
 				.show();
 	}
 
