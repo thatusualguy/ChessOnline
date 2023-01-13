@@ -39,7 +39,6 @@ public class LoginFragment extends Fragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 	}
 
 	@Override
@@ -55,10 +54,11 @@ public class LoginFragment extends Fragment {
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
 
-		savedStateHandle = Navigation.findNavController(view)
-				.getPreviousBackStackEntry()
+		savedStateHandle = Navigation.findNavController(view).getCurrentBackStackEntry()
 				.getSavedStateHandle();
-		savedStateHandle.set(LOGIN_SUCCESSFUL, false);
+		if((boolean)savedStateHandle.get(LOGIN_SUCCESSFUL)){
+			navigateBack();
+		}
 
 		binding.loginLoginButton.setOnClickListener(v -> {
 			String username = binding.registrationEmail.getText().toString().trim();
@@ -82,21 +82,22 @@ public class LoginFragment extends Fragment {
 		userViewModel.login(username, password).observe(getViewLifecycleOwner(), (Observer<LoginResult>) result -> {
 			if (result.success) {
 				savedStateHandle.set(LOGIN_SUCCESSFUL, true);
-				Navigation.findNavController(binding.getRoot()).popBackStack();
+				navigateBack();
 			} else {
-				showErrorMessage(result);
+				showErrorMessage(result.message);
 			}
 			control.setEnabled(true);
 		});
 	}
 
-	private void showErrorMessage(LoginResult result) {
-		Snackbar.make(requireView(), result.message, Snackbar.LENGTH_LONG)
-//				.setBackgroundTint(com.google.android.material.R.attr.colorPrimaryVariant)
-//				.setTextColor(com.google.android.material.R.attr.colorOnPrimary)
+	private void showErrorMessage(String message) {
+		Snackbar.make(requireView(), message, Snackbar.LENGTH_LONG)
 				.show();
 	}
 
+	public Boolean navigateBack() {
+		return Navigation.findNavController(binding.getRoot()).popBackStack();
+	}
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();

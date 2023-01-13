@@ -5,12 +5,10 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import io.github.thatusualguy.chessonline.Grpc;
+import io.github.thatusualguy.chessonline.R;
 import io.github.thatusualguy.chessonline.grpc.ChessOnline;
 import io.github.thatusualguy.chessonline.grpc.chess_accountGrpc;
-import io.grpc.Deadline;
 import io.grpc.ManagedChannel;
-import io.grpc.ManagedChannelBuilder;
-import io.grpc.stub.CallStreamObserver;
 import io.grpc.stub.StreamObserver;
 
 public class UserViewModel extends ViewModel {
@@ -28,12 +26,13 @@ public class UserViewModel extends ViewModel {
 		user.postValue(_user);
 	}
 
-	public LiveData<LoginResult> login(String username, String password) {
+	private chess_accountGrpc.chess_accountStub getAsyncStub() {
 		ManagedChannel channel = Grpc.getManagedChannel();
-		chess_accountGrpc.chess_accountBlockingStub
-				blockingStub = chess_accountGrpc.newBlockingStub(channel);
-		chess_accountGrpc.chess_accountStub
-				asyncStub = chess_accountGrpc.newStub(channel);
+		return chess_accountGrpc.newStub(channel);
+	}
+
+	public LiveData<LoginResult> login(String username, String password) {
+		chess_accountGrpc.chess_accountStub asyncStub = getAsyncStub();
 
 		ChessOnline.login_reqiest loginReqiest = ChessOnline.login_reqiest
 				.newBuilder()
@@ -70,6 +69,46 @@ public class UserViewModel extends ViewModel {
 				loginResult.message = t.getMessage();
 				res.postValue(loginResult);
 //				user.postValue(new User());
+			}
+
+			@Override
+			public void onCompleted() {
+			}
+		});
+
+		return res;
+	}
+
+	public LiveData<RegisterResult> register(String email, String name, String password) {
+		chess_accountGrpc.chess_accountStub asyncStub = getAsyncStub();
+
+		MutableLiveData<RegisterResult> res = new MutableLiveData<>();
+		ChessOnline.register_request registerRequest = ChessOnline.register_request.newBuilder()
+				.setEmail(email)
+				.setName(name)
+				.setPassword(password)
+				.build();
+
+		asyncStub.register(registerRequest, new StreamObserver<ChessOnline.register_reply>() {
+			@Override
+			public void onNext(ChessOnline.register_reply value) {
+				RegisterResult registerResult = new RegisterResult();
+				registerResult.Success = value.hasSuccess() && value.getSuccess();
+
+				if (registerResult.Success) {
+
+				} else {
+					registerResult.Message = value.getErrorMessage();
+				}
+				res.postValue(registerResult);
+			}
+
+			@Override
+			public void onError(Throwable t) {
+				RegisterResult registerResult = new RegisterResult();
+				registerResult.Success = false;
+				registerResult.Message = t.getMessage();
+				res.postValue(registerResult);
 			}
 
 			@Override
