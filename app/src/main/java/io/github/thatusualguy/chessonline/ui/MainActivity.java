@@ -11,6 +11,7 @@ import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -21,10 +22,15 @@ import io.github.thatusualguy.chessonline.ui.auth.LoginFragment;
 
 public class MainActivity extends AppCompatActivity {
 
+	public static SharedPreferences preferences;
+
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+
+		preferences = getPreferences(0);
 	}
 
 	private static final int TIME_INTERVAL = 1000;

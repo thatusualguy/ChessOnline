@@ -1,4 +1,4 @@
-package io.github.thatusualguy.chessonline.vm;
+package io.github.thatusualguy.chessonline.models;
 
 public class LoginResult {
 	public boolean success;

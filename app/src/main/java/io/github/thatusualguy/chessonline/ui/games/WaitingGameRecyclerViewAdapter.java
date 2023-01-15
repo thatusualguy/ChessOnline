@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import io.github.thatusualguy.chessonline.databinding.FragmentWaitingGamesBinding;
 import io.github.thatusualguy.chessonline.vm.SelectedGameNavigation;
-import io.github.thatusualguy.chessonline.vm.WaitingGame;
+import io.github.thatusualguy.chessonline.models.WaitingGame;
 
 import java.util.List;
 

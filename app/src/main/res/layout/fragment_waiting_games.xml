@@ -7,7 +7,7 @@
 
         <variable
             name="game"
-            type="io.github.thatusualguy.chessonline.vm.WaitingGame" />
+            type="io.github.thatusualguy.chessonline.models.WaitingGame" />
     </data>
 
     <androidx.cardview.widget.CardView

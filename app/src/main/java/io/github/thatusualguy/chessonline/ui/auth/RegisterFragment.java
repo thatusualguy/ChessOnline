@@ -18,11 +18,8 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Objects;
 
-import io.github.thatusualguy.chessonline.R;
-import io.github.thatusualguy.chessonline.databinding.FragmentLoginBinding;
 import io.github.thatusualguy.chessonline.databinding.FragmentRegisterBinding;
-import io.github.thatusualguy.chessonline.vm.LoginResult;
-import io.github.thatusualguy.chessonline.vm.RegisterResult;
+import io.github.thatusualguy.chessonline.models.RegisterResult;
 import io.github.thatusualguy.chessonline.vm.UserViewModel;
 
 public class RegisterFragment extends Fragment {

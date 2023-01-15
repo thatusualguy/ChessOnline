@@ -1,4 +1,4 @@
-package io.github.thatusualguy.chessonline;
+package io.github.thatusualguy.chessonline.mygrpc;
 
 
 import io.grpc.CallOptions;
@@ -12,15 +12,16 @@ import io.grpc.ManagedChannelBuilder;
 import io.grpc.Metadata;
 import io.grpc.MethodDescriptor;
 
-public class Grpc {
+public class GrpcChannelRepo {
 	private static Channel sChannel;
 
 	protected static String jwt = "";
 
 	static public Channel getChannel() {
 		if (sChannel == null) {
+			GrpcServerInfo server = GrpcServerInfo.getServer();
 			ClientInterceptor interceptor = new HeaderClientInterceptor();
-			Channel channel = ManagedChannelBuilder.forAddress("10.0.2.2", 7105).usePlaintext().build();
+			Channel channel = ManagedChannelBuilder.forAddress(server.address, server.port).usePlaintext().build();
 			sChannel = ClientInterceptors.intercept(channel, interceptor);
 		}
 		return sChannel;
@@ -43,7 +44,7 @@ public class Grpc {
 					Metadata fixedHeaders = new Metadata();
 					Metadata.Key<String> key =
 							Metadata.Key.of("Authorization", Metadata.ASCII_STRING_MARSHALLER);
-					fixedHeaders.put(key, Grpc.jwt);
+					fixedHeaders.put(key, GrpcChannelRepo.jwt);
 					headers.merge(fixedHeaders);
 
 					super.start(new ForwardingClientCallListener.SimpleForwardingClientCallListener<RespT>(responseListener) {

@@ -6,7 +6,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
@@ -15,11 +14,8 @@ import android.view.ViewGroup;
 
 import com.google.android.material.snackbar.Snackbar;
 
-import io.github.thatusualguy.chessonline.R;
-import io.github.thatusualguy.chessonline.databinding.FragmentLoginBinding;
 import io.github.thatusualguy.chessonline.databinding.FragmentProfileBinding;
-import io.github.thatusualguy.chessonline.ui.auth.LoginFragmentDirections;
-import io.github.thatusualguy.chessonline.vm.UserInfo;
+import io.github.thatusualguy.chessonline.models.UserInfo;
 import io.github.thatusualguy.chessonline.vm.UserViewModel;
 
 public class ProfileFragment extends Fragment {
@@ -30,7 +26,6 @@ public class ProfileFragment extends Fragment {
 	public ProfileFragment() {
 		// Required empty public constructor
 	}
-
 
 	public static ProfileFragment newInstance() {
 		ProfileFragment fragment = new ProfileFragment();

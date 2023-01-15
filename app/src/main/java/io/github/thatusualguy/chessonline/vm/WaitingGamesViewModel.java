@@ -13,7 +13,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import io.github.thatusualguy.chessonline.Grpc;
+import io.github.thatusualguy.chessonline.models.ChessColor;
+import io.github.thatusualguy.chessonline.models.WaitingGame;
+import io.github.thatusualguy.chessonline.mygrpc.GrpcChannelRepo;
 import io.github.thatusualguy.chessonline.grpc.ChessOnline;
 import io.github.thatusualguy.chessonline.grpc.chess_gameGrpc;
 import io.grpc.Channel;
@@ -41,7 +43,7 @@ public class WaitingGamesViewModel extends ViewModel {
 	}
 
 	private chess_gameGrpc.chess_gameStub getAsyncStub() {
-		Channel channel = Grpc.getChannel();
+		Channel channel = GrpcChannelRepo.getChannel();
 		return chess_gameGrpc.newStub(channel);
 	}
 

@@ -9,12 +9,15 @@ import androidx.lifecycle.ViewModel;
 
 import com.google.protobuf.Empty;
 
-import io.github.thatusualguy.chessonline.Grpc;
+import io.github.thatusualguy.chessonline.models.LoginResult;
+import io.github.thatusualguy.chessonline.models.RegisterResult;
+import io.github.thatusualguy.chessonline.models.User;
+import io.github.thatusualguy.chessonline.models.UserInfo;
+import io.github.thatusualguy.chessonline.models.UserInfoChange;
+import io.github.thatusualguy.chessonline.mygrpc.GrpcChannelRepo;
 import io.github.thatusualguy.chessonline.grpc.ChessOnline;
 import io.github.thatusualguy.chessonline.grpc.chess_accountGrpc;
 import io.grpc.Channel;
-import io.grpc.ManagedChannel;
-import io.grpc.stub.AbstractAsyncStub;
 import io.grpc.stub.StreamObserver;
 
 public class UserViewModel extends ViewModel {
@@ -34,7 +37,7 @@ public class UserViewModel extends ViewModel {
 	}
 
 	private chess_accountGrpc.chess_accountStub getAsyncStub() {
-		Channel channel = Grpc.getChannel();
+		Channel channel = GrpcChannelRepo.getChannel();
 		return chess_accountGrpc.newStub(channel);
 	}
 
@@ -57,7 +60,7 @@ public class UserViewModel extends ViewModel {
 
 				if (loginResult.success) {
 					loginResult.jwt = value.getJwt();
-					Grpc.setJwt(loginResult.jwt);
+					GrpcChannelRepo.setJwt(loginResult.jwt);
 				} else {
 					loginResult.message = value.getErrorMessage();
 				}
@@ -197,7 +200,7 @@ public class UserViewModel extends ViewModel {
 	}
 
 	public void logout() {
-		Grpc.setJwt("");
+		GrpcChannelRepo.setJwt("");
 		user.postValue(new User());
 	}
 }

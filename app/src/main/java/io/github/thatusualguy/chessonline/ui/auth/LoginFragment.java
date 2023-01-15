@@ -5,12 +5,10 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.SavedStateHandle;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,11 +16,7 @@ import android.view.ViewGroup;
 
 import com.google.android.material.snackbar.Snackbar;
 
-import java.util.Objects;
-
 import io.github.thatusualguy.chessonline.databinding.FragmentLoginBinding;
-import io.github.thatusualguy.chessonline.ui.games.WaitingGamesFragmentDirections;
-import io.github.thatusualguy.chessonline.vm.LoginResult;
 import io.github.thatusualguy.chessonline.vm.UserViewModel;
 
 
