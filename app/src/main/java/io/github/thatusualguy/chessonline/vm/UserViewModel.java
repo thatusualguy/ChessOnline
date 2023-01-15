@@ -1,17 +1,19 @@
 package io.github.thatusualguy.chessonline.vm;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import io.github.thatusualguy.chessonline.Grpc;
-import io.github.thatusualguy.chessonline.R;
 import io.github.thatusualguy.chessonline.grpc.ChessOnline;
 import io.github.thatusualguy.chessonline.grpc.chess_accountGrpc;
+import io.grpc.Channel;
 import io.grpc.ManagedChannel;
 import io.grpc.stub.StreamObserver;
 
 public class UserViewModel extends ViewModel {
+	@NonNull
 	private final MutableLiveData<User> user = new MutableLiveData<>();
 
 	// TODO: load user from shared prefs
@@ -27,7 +29,7 @@ public class UserViewModel extends ViewModel {
 	}
 
 	private chess_accountGrpc.chess_accountStub getAsyncStub() {
-		ManagedChannel channel = Grpc.getManagedChannel();
+		Channel channel = Grpc.getChannel();
 		return chess_accountGrpc.newStub(channel);
 	}
 
@@ -50,6 +52,7 @@ public class UserViewModel extends ViewModel {
 
 				if (loginResult.success) {
 					loginResult.jwt = value.getJwt();
+					Grpc.setJwt(loginResult.jwt);
 				} else {
 					loginResult.message = value.getErrorMessage();
 				}
