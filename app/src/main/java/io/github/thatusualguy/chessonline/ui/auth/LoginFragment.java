@@ -54,9 +54,7 @@ public class LoginFragment extends Fragment {
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
 
-		savedStateHandle = Navigation.findNavController(view).getCurrentBackStackEntry()
-				.getSavedStateHandle();
-		if((boolean)savedStateHandle.get(LOGIN_SUCCESSFUL)){
+		if (userViewModel.getUser().getValue().Logged_in) {
 			navigateBack();
 		}
 
@@ -79,9 +77,8 @@ public class LoginFragment extends Fragment {
 	private void login(String username, String password, View control) {
 		control.setEnabled(false);
 
-		userViewModel.login(username, password).observe(getViewLifecycleOwner(), (Observer<LoginResult>) result -> {
+		userViewModel.login(username, password).observe(getViewLifecycleOwner(), result -> {
 			if (result.success) {
-				savedStateHandle.set(LOGIN_SUCCESSFUL, true);
 				navigateBack();
 			} else {
 				showErrorMessage(result.message);
@@ -98,6 +95,7 @@ public class LoginFragment extends Fragment {
 	public Boolean navigateBack() {
 		return Navigation.findNavController(binding.getRoot()).popBackStack();
 	}
+
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
