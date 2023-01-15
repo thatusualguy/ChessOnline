@@ -1,15 +1,20 @@
 package io.github.thatusualguy.chessonline.vm;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+
+import com.google.protobuf.Empty;
 
 import io.github.thatusualguy.chessonline.Grpc;
 import io.github.thatusualguy.chessonline.grpc.ChessOnline;
 import io.github.thatusualguy.chessonline.grpc.chess_accountGrpc;
 import io.grpc.Channel;
 import io.grpc.ManagedChannel;
+import io.grpc.stub.AbstractAsyncStub;
 import io.grpc.stub.StreamObserver;
 
 public class UserViewModel extends ViewModel {
@@ -120,5 +125,79 @@ public class UserViewModel extends ViewModel {
 		});
 
 		return res;
+	}
+
+	public LiveData<UserInfo> getUserInfo() {
+		MutableLiveData<UserInfo> res = new MutableLiveData<>();
+
+		getAsyncStub().getInfo(Empty.newBuilder().build(), new StreamObserver<ChessOnline.account_info>() {
+			@Override
+			public void onNext(ChessOnline.account_info value) {
+				UserInfo userInfo = new UserInfo(value.getFullname(), value.getEmail());
+				res.postValue(userInfo);
+			}
+
+			@Override
+			public void onError(Throwable t) {
+				Log.d("ChessOnline", t.getMessage());
+			}
+
+			@Override
+			public void onCompleted() {
+
+			}
+		});
+
+		return res;
+	}
+
+	public LiveData<UserInfoChange> setUserInfo(UserInfo new_info) {
+		ChessOnline.change_info_request request = ChessOnline.change_info_request
+				.newBuilder()
+				.setNewInfo(ChessOnline.account_info
+						.newBuilder()
+						.setEmail(new_info.email)
+						.setPassword(new_info.password)
+						.setFullname(new_info.username)
+						.build())
+				.build();
+
+		MutableLiveData<UserInfoChange> res = new MutableLiveData<>();
+		getAsyncStub().setInfo(request, new StreamObserver<ChessOnline.change_info_reply>() {
+			@Override
+			public void onNext(ChessOnline.change_info_reply value) {
+				UserInfoChange userInfoChange = new UserInfoChange();
+				userInfoChange.success = value.getSuccess();
+
+				if (value.hasErrorMessage())
+					userInfoChange.message = value.getErrorMessage();
+				else {
+					userInfoChange.userInfo = new UserInfo(value.getCurrentInfo().getFullname(), value.getCurrentInfo().getEmail());
+				}
+
+				res.postValue(userInfoChange);
+			}
+
+			@Override
+			public void onError(Throwable t) {
+				UserInfoChange userInfoChange = new UserInfoChange();
+				userInfoChange.success = false;
+				userInfoChange.message = t.getMessage();
+
+				res.postValue(userInfoChange);
+			}
+
+			@Override
+			public void onCompleted() {
+
+			}
+		});
+
+		return res;
+	}
+
+	public void logout() {
+		Grpc.setJwt("");
+		user.postValue(new User());
 	}
 }
