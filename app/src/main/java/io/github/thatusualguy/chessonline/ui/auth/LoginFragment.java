@@ -18,6 +18,8 @@ import android.view.ViewGroup;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.Objects;
+
 import io.github.thatusualguy.chessonline.databinding.FragmentLoginBinding;
 import io.github.thatusualguy.chessonline.ui.games.WaitingGamesFragmentDirections;
 import io.github.thatusualguy.chessonline.vm.LoginResult;
@@ -53,6 +55,11 @@ public class LoginFragment extends Fragment {
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
+
+		// TODO: add autologin
+//		savedStateHandle = Objects.requireNonNull(Navigation.findNavController(view)
+//						.getPreviousBackStackEntry())
+//				.getSavedStateHandle();
 
 		if (userViewModel.getUser().getValue().Logged_in) {
 			navigateBack();

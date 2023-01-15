@@ -6,10 +6,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import io.github.thatusualguy.chessonline.databinding.FragmentWaitingGamesBinding;
+import io.github.thatusualguy.chessonline.vm.SelectedGameNavigation;
 import io.github.thatusualguy.chessonline.vm.WaitingGame;
 
 import java.util.List;

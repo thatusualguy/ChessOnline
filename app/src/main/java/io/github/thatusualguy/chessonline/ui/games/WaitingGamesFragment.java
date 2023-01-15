@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -18,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.snackbar.Snackbar;
 
 import io.github.thatusualguy.chessonline.databinding.FragmentWaitingGamesListBinding;
-import io.github.thatusualguy.chessonline.vm.User;
+import io.github.thatusualguy.chessonline.vm.SelectedGameNavigation;
 import io.github.thatusualguy.chessonline.vm.UserViewModel;
 import io.github.thatusualguy.chessonline.vm.WaitingGamesViewModel;
 
