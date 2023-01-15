@@ -36,6 +36,7 @@ public class RegisterFragment extends Fragment {
 		// Required empty public constructor
 	}
 
+	// TODO: get & use safeargs
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

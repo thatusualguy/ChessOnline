@@ -1,6 +1,9 @@
 package io.github.thatusualguy.chessonline.vm;
 
+import androidx.annotation.NonNull;
+
 public class User {
+	@NonNull
 	public Boolean Logged_in = false;
 	public String Jwt;
 
