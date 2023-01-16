@@ -64,7 +64,11 @@
         android:id="@+id/gameHistoryFragment"
         android:name="io.github.thatusualguy.chessonline.ui.history.GameHistoryFragment"
         android:label="fragment_game_history"
-        tools:layout="@layout/fragment_game_history" />
+        tools:layout="@layout/fragment_game_history" >
+        <argument
+            android:name="id"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/loginFragment"
         android:name="io.github.thatusualguy.chessonline.ui.auth.LoginFragment"
