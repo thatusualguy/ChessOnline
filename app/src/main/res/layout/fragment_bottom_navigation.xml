@@ -6,6 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?android:attr/colorPrimary"
+    app:itemTextColor="@color/desert_storm"
+    app:itemIconTint="@color/desert_storm"
     app:labelVisibilityMode="auto"
     app:menu="@menu/main_bottom_menu"
     tools:context=".ui.BottomNavigationFragment" />
