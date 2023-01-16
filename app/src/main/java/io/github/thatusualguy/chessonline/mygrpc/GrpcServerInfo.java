@@ -9,7 +9,8 @@ public class GrpcServerInfo {
 	private static final String SERVER_PORT = "SERVER_PORT";
 	private static final String APP_NAME = "io.github.thathusualhuy.chessonline";
 
-	public static final String DEFAULT_ADDRESS = "10.0.2.2";
+//	public static final String DEFAULT_ADDRESS = "10.0.2.2";
+	public static final String DEFAULT_ADDRESS = "185.248.101.68";
 	public static final int DEFAULT_PORT = 7105;
 
 	public final String address;
