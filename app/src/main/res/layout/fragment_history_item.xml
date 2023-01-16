@@ -1,77 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="16dp"
-    android:backgroundTint="@color/lose"
-    android:orientation="horizontal"
-    android:padding="8dp"
-    app:cardBackgroundColor="?attr/colorSecondary"
-    app:cardCornerRadius="@dimen/cornerRadius">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <RelativeLayout
+    <data>
+
+        <variable
+            name="game"
+            type="io.github.thatusualguy.chessonline.models.HistoryGame" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/history.game.card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_marginBottom="16dp"
+        android:backgroundTintMode="src_in"
+        android:shadowRadius="0"
+        android:outlineSpotShadowColor="#0000"
+        android:outlineAmbientShadowColor="#0000"
+        android:backgroundTint="@{Integer.parseInt(game.winner_id) == 0 ? @color/lose : @color/win}"
+        android:orientation="horizontal"
+        android:padding="0dp"
+        app:cardBackgroundColor="?attr/colorSecondary"
+        app:cardCornerRadius="@dimen/cornerRadius"
+        tools:backgroundTint="@color/lose">
 
-        <TextView
-            android:id="@+id/history.game.id"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_margin="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:ellipsize="none"
-            android:ems="2"
-            android:maxLines="1"
-            android:text="#aidnffffaww" />
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/history.game.name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="@dimen/text_margin"
-            android:layout_marginBottom="@dimen/text_margin"
-            android:layout_toRightOf="@id/history.game.id"
-            android:drawableLeft="@drawable/person_20dp"
-            android:ellipsize="end"
-            android:maxEms="8"
-            android:maxLines="1"
-            android:text="ThatUsualGuyfffffffffffff" />
+            <TextView
+                android:id="@+id/history.game.id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:ellipsize="none"
+                android:ems="2"
+                android:maxLines="1"
+                android:text="@{game.id}"
+                tools:text="#aidnffffaww" />
 
-        <TextView
-            android:id="@+id/games.waiting.item.elo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_toEndOf="@id/history.game.name"
-            android:maxEms="4"
-            android:text="(100)" />
+            <TextView
+                android:id="@+id/history.game.name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="@dimen/text_margin"
+                android:layout_marginBottom="@dimen/text_margin"
+                android:layout_toRightOf="@id/history.game.id"
+                android:drawableLeft="@drawable/person_20dp"
+                android:ellipsize="end"
+                android:maxEms="8"
+                android:drawableTint="@color/black"
+                android:maxLines="1"
+                android:text="@{game.player_1}"
+                tools:text="ThatUsualGuyfffffffffffff" />
+
+            <TextView
+                android:id="@+id/games.waiting.item.elo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_toEndOf="@id/history.game.name"
+                android:maxEms="4"
+                android:text="@{'('+String.valueOf(game.old_opponent_elo)+')'}"
+                tools:text="(100)" />
 
 
-        <TextView
+            <TextView
 
-            android:id="@+id/games.waiting.item.join"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center_vertical"
-            android:layout_marginEnd="8dp"
+                android:id="@+id/games.waiting.item.join"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="8dp"
+                android:text="@{String.valueOf(game.elo_change)}"
+                tools:text="+100" />
 
-            android:text="+100" />
+        </RelativeLayout>
 
-    </RelativeLayout>
-
-</androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
+</layout>

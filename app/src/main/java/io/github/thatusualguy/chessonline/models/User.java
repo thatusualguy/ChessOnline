@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 
 public class User {
 	@NonNull
-	public Boolean Logged_in = false;
+	public Boolean Logged_in;
 	public String Jwt;
 
 	public User(){

@@ -68,7 +68,7 @@ public class RegisterFragment extends Fragment {
 	private void register(String email, String name, String password, View control) {
 		control.setEnabled(false);
 
-		userViewModel.register(email, name, password).observe(getViewLifecycleOwner(), (Observer<RegisterResult>) result -> {
+		userViewModel.register(email, name, password).observe(getViewLifecycleOwner(), result -> {
 			if (result.Success) {
 				savedStateHandle.set(LOGIN_SUCCESSFUL, true);
 				navigateBack();
