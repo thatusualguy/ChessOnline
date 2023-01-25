@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import io.github.thatusualguy.chessonline.R;
+import io.github.thatusualguy.chessonline.ui.games.board.Game;
+import io.github.thatusualguy.chessonline.ui.games.board.Match;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,6 +63,13 @@ public class GameFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 		// Inflate the layout for this fragment
+
+		Match match = new Match(String.valueOf(System.currentTimeMillis()),Game.MODE_2_PLAYER_2_SIDES);
+		Game.newGame(match, null);
+
 		return inflater.inflate(R.layout.fragment_game, container, false);
+	}
+
+	public void updateTurn() {
 	}
 }

@@ -24,7 +24,7 @@ public class StatisticViewModel extends ViewModel {
 
 
 	public LiveData<List<HistoryGame>> getDefaultGameHistory() {
-		return getGameHistory(1, 10);
+		return getGameHistory(1, 50);
 	}
 
 	public LiveData<List<HistoryGame>> getGameHistory(int offset, int length) {

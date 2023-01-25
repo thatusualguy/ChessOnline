@@ -63,7 +63,14 @@
         android:layout_height="400dp"
         android:layout_gravity="center"
         android:layout_weight="1"
-        android:background="@color/davys_grey" />
+        android:background="@color/davys_grey">
+
+        <io.github.thatusualguy.chessonline.ui.games.board.BoardView
+            android:id="@+id/board"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </FrameLayout>
 
     <Button
         android:id="@+id/games.game.give_up"

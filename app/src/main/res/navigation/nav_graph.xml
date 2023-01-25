@@ -76,7 +76,8 @@
         tools:layout="@layout/fragment_login" >
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"
-            app:destination="@id/registerFragment" />
+            app:destination="@id/registerFragment"
+            app:enterAnim="@android:animator/fade_in" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
